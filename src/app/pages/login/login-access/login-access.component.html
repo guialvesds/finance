@@ -1,5 +1,4 @@
 <section class="section-login">
-
     <div class="container-animated">
         <ul class="circles">
             <li></li>
@@ -14,19 +13,18 @@
             <li></li>
         </ul>
     </div>
-
     <div class="card-login">
         <div class="top">
-            <h1>Bem-vindo(a) ao Person!</h1>
+            <h1>Login</h1>
         </div>
         <div class="main">
             <input type="email" name="email" placeholder="seuemail@email.com">
             <input type="password" name="password" placeholder="sua senha">
         </div>
         <div class="footer">
-            <button>Entrar</button>
+            <button (click)="navigate('/home')">Entrar</button>
             <span>Ou</span>
-            <span>Criar conta.</span>
+            <button (click)="navigate('/login/createAccount')">Criar conta.</button>
         </div>
     </div>
 </section>

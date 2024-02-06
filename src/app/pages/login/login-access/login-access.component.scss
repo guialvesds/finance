@@ -28,7 +28,7 @@
             list-style: none;
             width: 20px;
             height: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.692);
             animation: animate 25s linear infinite;
             bottom: -150px;
 
@@ -117,12 +117,13 @@
         position: absolute;
         width: 60%;
         height: 70%;
-        background-color: #ffffffc5;
+        background-color: #ffffffe8;
         border-radius: 8px;
 
         .top {
             h1 {
                 color: #190a35;
+
             }
         }
 
@@ -138,13 +139,14 @@
                 margin-top: 1rem;
                 width: 50%;
                 height: 2rem;
-                border-radius: 3px;
-                border: none;
+                border-radius: 8px;
+                border: 2px solid black;
                 padding-left: 10px;
                 outline: 0;
                 font-size: 17px;
                 color: rgb(102, 102, 102);
                 font-weight: 500;
+                background-color: white;
             }
         }
 
@@ -158,27 +160,35 @@
                 margin-bottom: 1rem;
                 width: 10rem;
                 height: 2rem;
-                border-radius: 3px;
-                border: none;
+                border-radius: 8px;
+                border: 2px solid black;
                 outline: 0;
                 letter-spacing: 3px;
                 cursor: pointer;
                 color: #190a35;
                 font-weight: 800;
+                background-color: white;
+
+                &:hover {
+                    letter-spacing: 4px;
+                }
+
+                &:nth-child(3) {
+                    background-color: transparent;
+                    border: none;
+
+                    &:hover {
+                        color: blue;
+                    }
+
+                }
             }
 
             span {
-                &:nth-child(3) {
-                    color: #190a35;
-                    font-size: 16px;
-                    font-weight: 700;
-                    letter-spacing: 3px;
-                    cursor: pointer;
-                }
-
-                &:hover {
-                    color: rgb(10, 38, 65);
-                }
+                color: #190a35;
+                font-size: 16px;
+                font-weight: 500;
+                letter-spacing: 3px;
             }
         }
     }
@@ -186,13 +196,29 @@
 
 @media screen and (max-width: 390px) {
     .card-login {
-        width: 90% !important; 
+        width: 90% !important;
+
+        .main {
+            width: 100%;
+
+            input {
+                width: 70% !important;
+            }
+        }
     }
 }
 
 @media screen and (max-width: 770px) {
     .card-login {
-        width: 90% !important; 
+        width: 90% !important;
+
+        .main {
+            width: 100%;
+
+            input {
+                width: 70% !important;
+            }
+        }
     }
 }
 

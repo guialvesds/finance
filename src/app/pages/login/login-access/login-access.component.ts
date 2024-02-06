@@ -18,10 +18,8 @@ export class LoginAccessComponent implements OnInit {
     private _route: Router,
   ) {}
 
-  home()  {
-    this._route.navigate(['home/HomeAccessComponent']);
-    console.log('Clicou');
-    
+  public navigate(router: string): void  {
+    this._route.navigate([router]);   
   }
 
 }
