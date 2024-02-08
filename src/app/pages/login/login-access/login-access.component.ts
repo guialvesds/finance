@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomeAccessComponent } from '../../home/home-access/home-access.component';
 
 @Component({
   selector: 'app-login-access',
@@ -10,16 +9,17 @@ import { HomeAccessComponent } from '../../home/home-access/home-access.componen
   styleUrl: './login-access.component.scss'
 })
 export class LoginAccessComponent implements OnInit {
+
   ngOnInit(): void {
-    
+
   }
 
   constructor(
     private _route: Router,
-  ) {}
+  ) { }
 
-  public navigate(router: string): void  {
-    this._route.navigate([router]);   
+  public navigate(router: string): void {
+    this._route.navigate([router]);
   }
 
 }
