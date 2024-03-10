@@ -1,62 +1,13 @@
-<section class="home-container">
-    <mat-toolbar color="primary">
-        <div class="btn-logo">
-            <button mat-icon-button aria-label="Menu icon" (click)="drawer.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <h1>UmReal</h1>
-        </div>
-        <div class="account-item">
-          <span>Olá, Guilherme!</span>  
-          <button>
-            <img src="../../../../assets/perfil-image.png" alt="">
-          </button>
-        </div>
-        
-    </mat-toolbar>
-    <mat-drawer-container class="example-container" [hasBackdrop]="false" autosize>
-        <mat-drawer #drawer mode="side" ngClass="!isCollapsed ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'"
-            [opened]="isMobile ? 'false' : 'true'">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="../../../../assets/logo.png" alt="Logo finance">
-                    <span>UmReal</span>
-                </div>
-                <hr>
-                <div class="buttons-actions">
-                    <button class="item-nav" (click)="navigate('/home/dashboard')">
-                        <mat-icon>dashboard</mat-icon>
-                        <span>Dashboard</span>
-                    </button>
-
-                    <button class="item-nav" (click)="navigate('/home/transacao')">
-                        <mat-icon>attach_money</mat-icon>
-                        <span>Entrada/Saída</span>
-                    </button>
-                    <button class="item-nav" (click)="navigate('/home/carteira')">
-                        <mat-icon>wallet</mat-icon>
-                        <span>Carteira</span>
-                    </button>
-                    <button class="item-nav" (click)="navigate('/home/configuracao')">
-                        <mat-icon>settings</mat-icon>
-                        <span>Configuração</span>
-                    </button>
-                    <button class="item-nav">
-                        <mat-icon>logout</mat-icon>
-                        <span>Sair</span>
-                    </button>
-                   
-                </div>
-                <hr>
-                <div class="anuncios">
-                    <a href="#">
-                        <img src="../../../../assets/download.png" alt="Propaganda">
-                    </a>
-                </div>
-            </div>
-        </mat-drawer>
-        <mat-drawer-content>
-            <router-outlet></router-outlet>
-        </mat-drawer-content>
-    </mat-drawer-container>
-</section>
+<mat-toolbar>
+    <button mat-icon-button (click)="collapsed.set(!collapsed())">
+        <mat-icon>menu</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav opened mode="side" [style.width]="sidNavWidth()">
+        <app-sidnav-custom  [collapsed]="collapsed()"/>
+    </mat-sidenav>
+    <mat-sidenav-content class="content" [style.margin-left]="sidNavWidth()">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

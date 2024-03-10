@@ -10,15 +10,17 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { SidnavCustomComponent } from "../../shared/components/sidnav-custom/sidnav-custom.component";
 
 
 
 @NgModule({
-  declarations: [HomeAccessComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule, MatSidenav, MatToolbarModule, MatIconModule, MatListModule,
-  ]
+    declarations: [HomeAccessComponent],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule, MatSidenav, MatToolbarModule, MatIconModule, MatListModule,
+        SidnavCustomComponent
+    ]
 })
 export class HomeModule { }

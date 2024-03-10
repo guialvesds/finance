@@ -1,0 +1,21 @@
+<div class="header-nav">
+    <img [width]="profilePicSize()" [height]="profilePicSize()" src="/assets/perfil-image.png" alt="imagem do perfil">
+    <div class="header-text" [class.hide-header-text] = "sidNavCollapsed()">
+        <h2>Boa noite!</h2>
+        <p>Guilherme.</p>
+    </div>
+</div>
+<mat-nav-list>
+    <a 
+    class="menu-item"
+    mat-list-item 
+    *ngFor="let item of navItens" 
+    routerLink="{{item.navigate}}"
+    routerLinkActive="selected-menu-item"
+    #rla="routerLinkActive"
+    [activated]="rla.isActive"
+    >
+    <mat-icon matListItemIcon >{{item.icon}}</mat-icon>
+    <span *ngIf="!sidNavCollapsed()">{{item.name}}</span>
+    </a>
+</mat-nav-list>
