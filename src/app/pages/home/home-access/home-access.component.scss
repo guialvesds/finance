@@ -1,6 +1,11 @@
 mat-toolbar {
     position: relative;
     z-index: 5;
+    background-color: rgb(47, 82, 112);
+
+    button {
+        color: aliceblue;
+    }
 }
 
 mat-sidenav-container {

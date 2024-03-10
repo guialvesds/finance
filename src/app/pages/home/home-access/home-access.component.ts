@@ -50,20 +50,10 @@ export class HomeAccessComponent implements OnInit {
       } else {
         this.isMobile = false;
       }
-    });  
+    });
 
-  }
-
-  toggleMenu() {
-    if (this.isMobile) {
-      this.sidenav.toggle();
-      this.isCollapsed = false; // On mobile, the menu can never be collapsed
-    } else {
-      this.sidenav.open(); // On desktop/tablet, the menu can never be fully closed
-      this.isCollapsed = !this.isCollapsed;
-    }
   }
 
   collapsed = signal(false);
-  sidNavWidth = computed(() =>  this.collapsed() ? '50px' : '250px')
+  sidNavWidth = computed(() => this.collapsed() ? '75px' : '250px')
 }
