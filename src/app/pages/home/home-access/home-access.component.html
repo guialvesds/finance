@@ -1,12 +1,15 @@
+<!-- TollBar -->
 <mat-toolbar>
     <button mat-icon-button (click)="collapsed.set(!collapsed())">
         <mat-icon>menu</mat-icon>
     </button>
 </mat-toolbar>
+<!-- SidBar -->
 <mat-sidenav-container>
     <mat-sidenav opened mode="side" [style.width]="sidNavWidth()">
         <app-sidnav-custom  [collapsed]="collapsed()"/>
     </mat-sidenav>
+    <!-- Conteúdo de exibição das pages -->
     <mat-sidenav-content class="content" [style.margin-left]="sidNavWidth()">
         <router-outlet></router-outlet>
     </mat-sidenav-content>
