@@ -1,42 +1,55 @@
 section {
 
-    .head, .card-detail {
+    .head,
+    .card-detail {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         flex-direction: column;
         flex-wrap: wrap;
     }
+
     .head {
-        width: 100%;       
+        width: 100%;
         flex-direction: row;
 
         .card-detail {
-           
+
             width: 15rem;
             border: none;
             border-radius: 5px;
             padding: 10px;
             margin: 5px;
 
-            &:hover {
-                box-shadow: active rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; 
-            }
-
-            &:nth-child(1){
+            &:nth-child(1) {
                 background-color: rgb(108, 108, 209);
             }
-            &:nth-child(2){
+
+            &:nth-child(2) {
                 background-color: rgb(212, 114, 114);
             }
-            &:nth-child(3){
+
+            &:nth-child(3) {
                 background-color: rgb(94, 189, 110);
             }
 
-          
-
             span {
+                letter-spacing: 2px;
+                color: white;
+                font-weight: 500;
 
+                &:nth-child(1) {
+                    font-size: 1.3em;
+                }
+
+                &:nth-child(2) {
+                    font-size: 1em;
+                }
+            }
+
+            &:hover {
+                box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.281);
+                transition: 100ms linear
             }
 
 
