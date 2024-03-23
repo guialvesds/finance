@@ -1,0 +1,45 @@
+section {
+
+    .head, .card-detail {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .head {
+        width: 100%;       
+        flex-direction: row;
+
+        .card-detail {
+           
+            width: 15rem;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+
+            &:hover {
+                box-shadow: active rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; 
+            }
+
+            &:nth-child(1){
+                background-color: rgb(108, 108, 209);
+            }
+            &:nth-child(2){
+                background-color: rgb(212, 114, 114);
+            }
+            &:nth-child(3){
+                background-color: rgb(94, 189, 110);
+            }
+
+          
+
+            span {
+
+            }
+
+
+        }
+    }
+}
