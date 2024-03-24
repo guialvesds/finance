@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, computed, signal } from '@angular/core';
+import { Component, Input, OnInit, computed, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { Router, RouterModule} from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 interface itemNav {
@@ -18,15 +18,14 @@ interface itemNav {
   templateUrl: './sidnav-custom.component.html',
   styleUrl: './sidnav-custom.component.scss'
 })
-export class SidnavCustomComponent {
+export class SidnavCustomComponent implements OnInit {
   sidNavCollapsed = signal(false);
   @Input() set collapsed(val: boolean) {
     this.sidNavCollapsed.set(val)
   }
 
-
   navItens: Array<itemNav> = [
-    // { name: "Início", icon: "home", navigate: "/home" },
+    { name: "Início", icon: "home", navigate: "/home/home" },
     { name: "Dashboard", icon: "dashboard", navigate: "/home/dashboard" },
     { name: "Entrada/Saída", icon: "attach_money", navigate: "/home/transacao" },
     { name: "Carteira", icon: "wallet", navigate: "/home/carteira" },
@@ -36,4 +35,24 @@ export class SidnavCustomComponent {
 
   profilePicSize = computed(() => this.sidNavCollapsed() ? '32' : '100');
 
+  hoursNow: string = '';
+
+  ngOnInit(): void {
+
+    this.dayAndNigth();
+  }
+  
+  dayAndNigth(): String {
+
+    const hours: string = new Date().toLocaleTimeString().substring(0, 2);
+
+    if (hours >= '05' && hours <= '11') {
+      this.hoursNow = 'Bom dia!'
+    } else if (hours >= '12' && hours <= '17') {
+      this.hoursNow = 'Boa tarde!'
+    } else {
+      this.hoursNow = 'Boa noite!'
+    }
+    return this.hoursNow;
+  }
 }
