@@ -25,7 +25,7 @@ export class SidnavCustomComponent implements OnInit {
   }
 
   navItens: Array<itemNav> = [
-    { name: "Início", icon: "home", navigate: "/home/home" },
+    { name: "Início", icon: "home", navigate: "/home/initial" },
     { name: "Dashboard", icon: "dashboard", navigate: "/home/dashboard" },
     { name: "Entrada/Saída", icon: "attach_money", navigate: "/home/transacao" },
     { name: "Carteira", icon: "wallet", navigate: "/home/carteira" },

@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { SidnavCustomComponent } from "../../shared/components/sidnav-custom/sidnav-custom.component";
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -20,7 +20,9 @@ import { SidnavCustomComponent } from "../../shared/components/sidnav-custom/sid
         CommonModule,
         HomeRoutingModule,
         MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule, MatSidenav, MatToolbarModule, MatIconModule, MatListModule,
-        SidnavCustomComponent
+        SidnavCustomComponent,
+        HttpClientModule,
+        
     ]
 })
 export class HomeModule { }

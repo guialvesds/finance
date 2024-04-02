@@ -1,0 +1,93 @@
+{
+    "wallet": [
+        {
+            "id": 1,
+            "walet_name": "Entrada",
+            "value": 1000.00
+        },
+        {
+            "id": 1,
+            "walet_name": "Saída",
+            "value": 500.00
+        },
+        {
+            "id": 1,
+            "walet_name": "Saldo",
+            "value": 500.00
+        }
+    ],
+    "transactions": [
+        {
+            "id": 1,
+            "user_name": "Guilherme Alves",
+            "value": 209.90,
+            "date": "01-04-2024",
+            "to_wallet": "Retirada",
+            "type": "1"
+        },
+        {
+            "id": 2,
+            "user_name": "Guilherme Alves",
+            "value": 109.90,
+            "date": "01-04-2024",
+            "to_wallet": "Entrada",
+            "type": "0"
+        },
+        {
+            "id": 3,
+            "user_name": "Guilherme Alves",
+            "value": 209.90,
+            "date": "01-04-2024",
+            "to_wallet": "Entrada",
+            "type": "0"
+        },
+        {
+            "id": 4,
+            "user_name": "Guilherme Alves",
+            "value": 9.90,
+            "date": "06-04-2024",
+            "to_wallet": "Retirada",
+            "type": "1"
+        },
+        {
+            "id": 5,
+            "user_name": "Guilherme Alves",
+            "value": 59.90,
+            "date": "06-04-2024",
+            "to_wallet": "Retirada",
+            "type": "1"
+        },
+        {
+            "id": 6,
+            "user_name": "Guilherme Alves",
+            "value": 209.90,
+            "date": "06-04-2024",
+            "to_wallet": "Retirada",
+            "type": "1"
+        },
+        {
+            "id": 7,
+            "user_name": "Guilherme Alves",
+            "value": 209.90,
+            "date": "06-04-2024",
+            "to_wallet": "Entrada",
+            "type": "0"
+        },
+        {
+            "id": 8,
+            "user_name": "Guilherme Alves",
+            "value": 40.90,
+            "date": "09-04-2024",
+            "to_wallet": "Entrada",
+            "type": "0"
+        },
+        {
+            "id": 9,
+            "user_name": "Guilherme Alves",
+            "value": 209.90,
+            "date": "09-04-2024",
+            "to_wallet": "Retirada",
+            "type": "1"
+        }
+    ]
+}
