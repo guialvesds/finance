@@ -43,7 +43,7 @@
         },
         {
             "id": 4,
-            "user_name": "Guilherme Alves",
+            "user_name": "Annáthaly Ipolito",
             "value": 9.90,
             "date": "06-04-2024",
             "to_wallet": "Retirada",
@@ -51,7 +51,7 @@
         },
         {
             "id": 5,
-            "user_name": "Guilherme Alves",
+            "user_name": "Annáthaly Ipolito",
             "value": 59.90,
             "date": "06-04-2024",
             "to_wallet": "Retirada",
@@ -67,7 +67,7 @@
         },
         {
             "id": 7,
-            "user_name": "Guilherme Alves",
+            "user_name": "Annáthaly Ipolito",
             "value": 209.90,
             "date": "06-04-2024",
             "to_wallet": "Entrada",
@@ -83,11 +83,19 @@
         },
         {
             "id": 9,
-            "user_name": "Guilherme Alves",
+            "user_name": "Silvana Alves",
             "value": 209.90,
             "date": "09-04-2024",
             "to_wallet": "Retirada",
             "type": "1"
+        },
+        {
+            "id": 10,
+            "user_name": "Karla Alves",
+            "value": 10.90,
+            "date": "16-07-2024",
+            "to_wallet": "Entrada",
+            "type": "0"
         }
     ]
 }

@@ -3,6 +3,20 @@ import Chart from 'chart.js/auto';
 import { DashboardService } from '../../core/services/dashboard.service';
 
 
+interface Transaction {
+  id: number;
+  user_name: string;
+  value: number;
+  date: string;
+  to_wallet: string; 
+  type: boolean;
+}
+
+interface UserData {
+  user_name: string;
+  transaction_count: number;
+}
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -15,12 +29,6 @@ export class DashboardComponent implements OnInit {
   wallets: any = [];
   transactions: any = [];
   chart: Chart<"line", string[], never> | any;
-  tEntrada: any = 0;
-  tRetirada: any = 0;
-  tDatas: any = '';
-
-
-
 
   constructor(private _dashboard: DashboardService) {
 
@@ -30,7 +38,9 @@ export class DashboardComponent implements OnInit {
     this.getWallet();
     this.getTransactions();
     this.createChart();
+    this.chartPerson();
   }
+
 
   getWallet(): void {
     this._dashboard.findWallet().subscribe(({
@@ -41,7 +51,6 @@ export class DashboardComponent implements OnInit {
       },
       error: (err: any) => {
         console.log("Erro ao buscar carteiras ", err);
-
       }
     }));
   }
@@ -50,31 +59,7 @@ export class DashboardComponent implements OnInit {
     this._dashboard.findTransactions().subscribe(({
       next: (item: { body: any; }) => {
         this.transactions = item.body;
-        console.log(this.transactions)
 
-        const entradaTransactions = this.transactions.filter((item: { to_wallet: string; }) => item.to_wallet === "Entrada");
-        const entradaValues = entradaTransactions.map((item: { value: any; }) => item.value);
-
-        const saidaTransactions = this.transactions.filter((item: { to_wallet: string; }) => item.to_wallet === "Retirada");
-        const saidaValues = saidaTransactions.map((item: { value: any; }) => item.value);
-
-        this.tEntrada = entradaValues.reduce((acc: number, value: any) => acc + value, 0);
-        this.tRetirada = saidaValues.reduce((acc: number, value: any) => acc + value, 0);
-
-        
-        
-        const groupedTransactions = this.transactions.reduce((groups: {[date: string]: any[]}, transaction: any) => {
-          const date = transaction.date; 
-          if (!groups[date]) {
-              groups[date] = [];
-          }
-          groups[date].push(transaction);
-          return groups;
-      }, {});
-      
-      
-      this.tDatas = Object.keys(groupedTransactions).filter((date: string) => groupedTransactions[date].length > 1);
-        
       },
       error: (err: any) => {
         console.log("Erro ao buscar transações ", err);
@@ -82,31 +67,94 @@ export class DashboardComponent implements OnInit {
     }));
   }
 
-  createChart() {
+  // Criar o chart de total de transações no mês
+  createChart() {    
+    const entradaTotals: number[] = [];
+    const retiradaTotals: number[] = [];
 
-    this.chart = new Chart('Mychart',
+    // Agrupar transações por data e tipo
+    const groupedTransactions: { [key: string]: { Entrada: number; Retirada: number } } = {};
+    this.transactions.forEach((transaction: Transaction) => {
+      if (!groupedTransactions[transaction.date]) {
+        groupedTransactions[transaction.date] = { Entrada: 0, Retirada: 0 };
+      }
+      if (transaction.to_wallet === "Entrada") {
+        groupedTransactions[transaction.date].Entrada += transaction.value;
+      } else {
+        groupedTransactions[transaction.date].Retirada += transaction.value;
+      }
+    });
+
+    // Extrair datas únicas
+    const dates: string[] = Object.keys(groupedTransactions);
+
+    // Extrair totais de entrada e retirada para cada data
+    dates.forEach(date => {
+      entradaTotals.push(groupedTransactions[date].Entrada);
+      retiradaTotals.push(groupedTransactions[date].Retirada);
+    });
+
+    this.chart = new Chart('transactions-value-chart',
       {
         type: 'bar',
         options: {
-          animation: false,
+          // animation: false,
         },
         data: {
-          labels: this.tDatas,
+          labels: dates,
           datasets: [
             {
               label: 'Entrada',
-              data: this.tEntrada
+              data: entradaTotals
             },
             {
               label: 'Retirada',
-              data: this.tRetirada
+              data: retiradaTotals
             }
           ]
         }
       }
     )
-    console.log("Abiu o chart");
-
   }
+
+chartPerson(): void {
+
+ // Array para armazenar os dados de usuário e transações
+const userData: UserData[] = [];
+
+// Agrupar transações por user_name e armazenar os dados
+const groupedTransactionsByUser: { [key: string]: number } = {};
+this.transactions.forEach((transaction: UserData) => {
+  if (!groupedTransactionsByUser[transaction.user_name]) {
+    groupedTransactionsByUser[transaction.user_name] = 0;
+  }
+  groupedTransactionsByUser[transaction.user_name]++;
+});
+
+// Preencher o array userData com os dados de usuário e transações
+Object.keys(groupedTransactionsByUser).forEach(user_name => {
+  const totalTransactions = groupedTransactionsByUser[user_name];
+  userData.push({ user_name: user_name, transaction_count: totalTransactions });
+});
+  this.chart = new Chart('transactions-person-chart',
+  {
+    type: 'pie',
+    options: {
+      // animation: 1,
+      // display: 1,
+    },
+    data: {      
+      labels: userData.map(item => item.user_name),
+      datasets: [
+        {
+          // label: `${userData.map(item => item.user_name)}`,
+          data: userData.map(item => item.transaction_count)
+        }
+      ]
+    }
+  }
+)
+}
+
 }
 
