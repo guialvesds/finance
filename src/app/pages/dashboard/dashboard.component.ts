@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { DashboardService } from '../../core/services/dashboard.service';
+import { Subject, Subscription, takeUntil } from 'rxjs';
+
 
 
 interface Transaction {
@@ -8,7 +10,7 @@ interface Transaction {
   user_name: string;
   value: number;
   date: string;
-  to_wallet: string; 
+  to_wallet: string;
   type: boolean;
 }
 
@@ -24,11 +26,14 @@ interface UserData {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   wallets: any = [];
-  transactions: any = [];
-  chart: Chart<"line", string[], never> | any;
+  transactions: Transaction[] | any = [];
+  chart: Chart<"line", string[], never> | any | Subscription;
+
+  subManger!: Subscription;
+  unsubscribeSignal: Subject<void> = new Subject();
 
   constructor(private _dashboard: DashboardService) {
 
@@ -37,13 +42,16 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getWallet();
     this.getTransactions();
-    this.createChart();
-    this.chartPerson();
   }
 
-
+  ngOnDestroy(): void {
+    this.unsubscribeSignal.next();   
+  }
+  //Buscar Carteiras
   getWallet(): void {
-    this._dashboard.findWallet().subscribe(({
+    this._dashboard.findWallet().pipe(
+      takeUntil(this.unsubscribeSignal.asObservable()),
+    ).subscribe(({
       next: (item: { body: any; }) => {
         this.wallets = item.body;
         console.log(this.wallets);
@@ -55,10 +63,17 @@ export class DashboardComponent implements OnInit {
     }));
   }
 
+  // Buscar Transações
   getTransactions(): void {
-    this._dashboard.findTransactions().subscribe(({
+    this.subManger = this._dashboard.findTransactions().pipe(
+      takeUntil(this.unsubscribeSignal.asObservable()),
+    ).subscribe(({
       next: (item: { body: any; }) => {
         this.transactions = item.body;
+        setTimeout(() => {
+          this.createChart();
+          this.chartPerson();
+        });
 
       },
       error: (err: any) => {
@@ -68,7 +83,7 @@ export class DashboardComponent implements OnInit {
   }
 
   // Criar o chart de total de transações no mês
-  createChart() {    
+  createChart() {
     const entradaTotals: number[] = [];
     const retiradaTotals: number[] = [];
 
@@ -117,44 +132,41 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-chartPerson(): void {
+  chartPerson(): void {
 
- // Array para armazenar os dados de usuário e transações
-const userData: UserData[] = [];
+    // Array para armazenar os dados de usuário e transações
+    const userData: UserData[] = [];
 
-// Agrupar transações por user_name e armazenar os dados
-const groupedTransactionsByUser: { [key: string]: number } = {};
-this.transactions.forEach((transaction: UserData) => {
-  if (!groupedTransactionsByUser[transaction.user_name]) {
-    groupedTransactionsByUser[transaction.user_name] = 0;
-  }
-  groupedTransactionsByUser[transaction.user_name]++;
-});
+    // Agrupar transações por user_name e armazenar os dados
+    const groupedTransactionsByUser: { [key: string]: number } = {};
+    this.transactions.forEach((transaction: UserData) => {
+      if (!groupedTransactionsByUser[transaction.user_name]) {
+        groupedTransactionsByUser[transaction.user_name] = 0;
+      }
+      groupedTransactionsByUser[transaction.user_name]++;
+    });
 
-// Preencher o array userData com os dados de usuário e transações
-Object.keys(groupedTransactionsByUser).forEach(user_name => {
-  const totalTransactions = groupedTransactionsByUser[user_name];
-  userData.push({ user_name: user_name, transaction_count: totalTransactions });
-});
-  this.chart = new Chart('transactions-person-chart',
-  {
-    type: 'pie',
-    options: {
-      // animation: 1,
-      // display: 1,
-    },
-    data: {      
-      labels: userData.map(item => item.user_name),
-      datasets: [
-        {
-          // label: `${userData.map(item => item.user_name)}`,
-          data: userData.map(item => item.transaction_count)
+    // Preencher o array userData com os dados de usuário e transações
+    Object.keys(groupedTransactionsByUser).forEach(user_name => {
+      const totalTransactions = groupedTransactionsByUser[user_name];
+      userData.push({ user_name: user_name, transaction_count: totalTransactions });
+    });
+    this.chart = new Chart('transactions-person-chart',
+      {
+        type: 'pie',
+        options: {
+        },
+        data: {
+          labels: userData.map(item => item.user_name),
+          datasets: [
+            {
+              // label: `${userData.map(item => item.user_name)}`,
+              data: userData.map(item => item.transaction_count)
+            }
+          ]
         }
-      ]
-    }
+      }
+    )
   }
-)
-}
-
 }
 

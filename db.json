@@ -6,12 +6,12 @@
             "value": 1000.00
         },
         {
-            "id": 1,
+            "id": 2,
             "walet_name": "Saída",
             "value": 500.00
         },
         {
-            "id": 1,
+            "id": 3,
             "walet_name": "Saldo",
             "value": 500.00
         }

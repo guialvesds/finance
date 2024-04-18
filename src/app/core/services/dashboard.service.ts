@@ -9,9 +9,7 @@ import { environment } from '../../../environment/environment';
 
 export class DashboardService {
 
-
-  private urlApi = environment.baseApiUrl;
-  
+  private urlApi = environment.baseApiUrl;  
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +24,4 @@ export class DashboardService {
       observe: 'response',
     });
   }
-
-  
-
 }
