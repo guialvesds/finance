@@ -1,0 +1,31 @@
+<section>
+    <div class="head">
+        <div class="card-detail" *ngFor="let item of wallets">
+            <span>{{item.walet_name}}</span>
+            <span>{{item.value}}</span>
+        </div>
+    </div>
+    <div class="body">
+        <div class="container-chart1">
+            <div class="div-chart">
+                <h3>Movimentação por data</h3>
+                <canvas id="transactions-value-chart">{{chart}}</canvas>
+            </div>
+            <div class="div-chart2">
+                <h3>Movimentação por pessoa</h3>
+                <canvas id="transactions-person-chart">{{chart}}</canvas>
+            </div>
+        </div>
+        <div class="transctions-person" >
+            <h3>Movimentação Geral</h3>
+            <div class="line-transaction" *ngFor="let item of transactions" >
+                <span>{{item.user_name}}</span>
+                <span>R$ {{item.value}}</span>
+                <span>{{item.date}}</span>
+                <span>{{item.to_wallet}}</span>
+                <mat-icon matListItemIcon   [ngStyle]="{'background-color': colorIcoChoice(item.type), 'color': 'white' }">{{iconChoice(item.type)}}</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+</section>

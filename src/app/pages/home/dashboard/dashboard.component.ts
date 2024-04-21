@@ -1,43 +1,31 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { DashboardService } from '../../core/services/dashboard.service';
+import { DashboardService } from '../../../core/services/dashboard.service';
 import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Transactions } from '../../../shared/models/transaction.modal';
+import { UserData } from '../../../shared/models/userdata.model';
+import { NgFor, NgStyle } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 
-
-interface Transaction {
-  id: number;
-  user_name: string;
-  value: number;
-  date: string;
-  to_wallet: string;
-  type: boolean;
-}
-
-interface UserData {
-  user_name: string;
-  transaction_count: number;
-}
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [NgFor, MatIconModule, NgStyle],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
   wallets: any = [];
-  transactions: Transaction[] | any = [];
+  transactions: Transactions[] | any = [];
   chart: Chart<"line", string[], never> | any | Subscription;
 
   subManger!: Subscription;
   unsubscribeSignal: Subject<void> = new Subject();
 
-  constructor(private _dashboard: DashboardService) {
-
-  }
+  constructor(private _dashboard: DashboardService) { }
 
   ngOnInit(): void {
     this.getWallet();
@@ -45,7 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeSignal.next();   
+    this.unsubscribeSignal.next();
   }
   //Buscar Carteiras
   getWallet(): void {
@@ -54,8 +42,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ).subscribe(({
       next: (item: { body: any; }) => {
         this.wallets = item.body;
-        console.log(this.wallets);
-
       },
       error: (err: any) => {
         console.log("Erro ao buscar carteiras ", err);
@@ -74,7 +60,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.createChart();
           this.chartPerson();
         });
-
       },
       error: (err: any) => {
         console.log("Erro ao buscar transações ", err);
@@ -89,7 +74,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // Agrupar transações por data e tipo
     const groupedTransactions: { [key: string]: { Entrada: number; Retirada: number } } = {};
-    this.transactions.forEach((transaction: Transaction) => {
+    this.transactions.forEach((transaction: Transactions) => {
       if (!groupedTransactions[transaction.date]) {
         groupedTransactions[transaction.date] = { Entrada: 0, Retirada: 0 };
       }
@@ -155,6 +140,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       {
         type: 'pie',
         options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
         },
         data: {
           labels: userData.map(item => item.user_name),
@@ -167,6 +157,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
     )
+  }
+
+  iconChoice(type: number): string {
+    return type == 1 ? "arrow_upward" : "arrow_downward"
+  }
+  colorIcoChoice(type: number): string {
+    return type == 0 ? "rgb(121, 207, 135)" : "rgb(224, 134, 134)"
   }
 }
 

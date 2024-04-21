@@ -1,7 +1,8 @@
 section {
 
     .head,
-    .card-detail {
+    .card-detail,
+    .transctions-person {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -15,22 +16,23 @@ section {
 
         .card-detail {
 
-            width: 15rem;
+            width: 17rem;
+            height: 6rem;
             border: none;
             border-radius: 5px;
             padding: 10px;
             margin: 5px;
 
             &:nth-child(1) {
-                background-color: rgb(108, 108, 209);
+                background-color: rgb(135, 135, 226);
             }
 
             &:nth-child(2) {
-                background-color: rgb(212, 114, 114);
+                background-color: rgb(224, 134, 134);
             }
 
             &:nth-child(3) {
-                background-color: rgb(94, 189, 110);
+                background-color: rgb(121, 207, 135);
             }
 
             span {
@@ -46,13 +48,6 @@ section {
                     font-size: 1em;
                 }
             }
-
-            &:hover {
-                box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.281);
-                transition: 100ms linear
-            }
-
-
         }
     }
 
@@ -71,7 +66,6 @@ section {
             h3 {
                 font-weight: 500;
                 letter-spacing: 2px;
-
                 border-bottom: solid 2px rgba(0, 0, 0, 0.322);
             }
 
@@ -80,7 +74,40 @@ section {
             }
 
             .div-chart2 {
-                width: 20rem;
+                width: 16rem;
+            }
+        }
+
+        .transctions-person {
+            // width: 80%;
+            margin-top: 5px;
+
+            h3 {
+                width: 90%;
+                font-weight: 500;
+                letter-spacing: 2px;
+                border-bottom: solid 2px rgba(0, 0, 0, 0.322);
+            }
+
+            .line-transaction {
+                width: 90%;
+                background-color: rgb(235, 250, 255) ;
+                margin-block: 4px;
+                padding: 8px;
+                border-radius: 3px;
+
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+
+                span {
+                    flex: 1;
+                    text-align: left;
+                    color: rgb(112, 112, 112);
+                    font-weight: 400;
+                }
+
+
             }
         }
     }
@@ -93,17 +120,17 @@ section {
         flex-direction: column;
 
         .card-detail {
-            width:90%;
+            width: 90%;
             border: none;
             border-radius: 5px;
             padding: 10px;
             // margin: 5px;
         }
     }
-    
+
     .body {
 
-        .container-chart1 {           
+        .container-chart1 {
             flex-direction: column;
             align-items: center;
             justify-content: space-around;
@@ -114,7 +141,6 @@ section {
             h3 {
                 font-weight: 400;
                 letter-spacing: 2px;
-
                 border-bottom: solid 2px rgba(0, 0, 0, 0.322);
             }
 

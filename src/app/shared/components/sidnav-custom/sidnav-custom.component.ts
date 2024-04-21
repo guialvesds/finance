@@ -28,14 +28,14 @@ export class SidnavCustomComponent implements OnInit {
     { name: "Início", icon: "home", navigate: "/home/initial" },
     { name: "Dashboard", icon: "dashboard", navigate: "/home/dashboard" },
     { name: "Entrada/Saída", icon: "attach_money", navigate: "/home/transacao" },
-    { name: "Carteira", icon: "wallet", navigate: "/home/carteira" },
-    { name: "Configuração", icon: "settings", navigate: "/home/configuracao" },
+    // { name: "Carteira", icon: "wallet", navigate: "/home/carteira" },
+    // { name: "Configuração", icon: "settings", navigate: "/home/configuracao" },
     { name: "Sair", icon: "logout", navigate: "#" }
   ]
 
-  profilePicSize = computed(() => this.sidNavCollapsed() ? '32' : '100');
+ public profilePicSize = computed(() => this.sidNavCollapsed() ? '32' : '100');
 
-  hoursNow: string = '';
+ public hoursNow: string = '';
 
   ngOnInit(): void {
 

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeAccessComponent } from './home-access/home-access.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { TransactionsComponent } from '../transactions/transactions.component';
-import { InitialComponent } from '../initial/initial.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { InitialComponent } from './initial/initial.component';
 
 
 
