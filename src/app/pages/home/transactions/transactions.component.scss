@@ -1,0 +1,26 @@
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 40%;
+  }
+
+  .mat-elevation-z8 {
+    box-shadow: none;
+  }
+
+  .search-end-add {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    .example-button-container {
+
+        
+        button {
+            border-radius: 8px;
+            box-shadow: none;
+        }
+      }
+  }
+  

@@ -1,11 +1,13 @@
 <section>
     <div class="head">
+        <!-- Carteiras -->
         <div class="card-detail" *ngFor="let item of wallets">
             <span>{{item.walet_name}}</span>
-            <span>{{item.value}}</span>
+            <span>R$ {{item.value}}</span>
         </div>
     </div>
     <div class="body">
+        <!-- Carts -->
         <div class="container-chart1">
             <div class="div-chart">
                 <h3>Movimentação por data</h3>
@@ -17,6 +19,7 @@
             </div>
         </div>
         <div class="transctions-person" >
+            <!-- Infro top 10 ultimas transações -->
             <h3>Movimentação Geral</h3>
             <div class="line-transaction" *ngFor="let item of transactions" >
                 <span>{{item.user_name}}</span>

@@ -1,70 +1,77 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardService } from '../../../core/services/dashboard.service';
-import { Sort } from '@angular/material/sort';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Transactions } from '../../../shared/models/transaction.modal';
+import { Subject, Subscription, takeUntil } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
-interface Transaction {
-  id: number;
-  user_name: string;
-  value: number;
-  date: string;
-  to_wallet: string;
-  type: boolean;
-}
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatSort, MatSortModule, MatInputModule, MatFormFieldModule, MatIconModule],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.scss'
 })
-export class TransactionsComponent implements AfterViewInit  {
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+export class TransactionsComponent implements OnInit ,OnDestroy {
 
-  transactions: Transaction[] = [];
-  displayedColumns: string[] = ['ID', 'Nome', 'Valor', 'Data Entrada',  'Tipo'];
-  dataSource = new MatTableDataSource<Transaction>(this.transactions);
+  displayedColumns: string[] = ['id', 'user_name', 'value', 'date', 'type'];
+  dataSource!: MatTableDataSource<Transactions>;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  @ViewChild(MatPaginator)  paginator!: MatPaginator;
+  @ViewChild(MatSort)  sort!: MatSort;
 
-  constructor(private _dashboard: DashboardService, private _liveAnnouncer: LiveAnnouncer) {
+   subManger!: Subscription;
+   unsubscribeSignal: Subject<void> = new Subject();
 
-  }
+  constructor(private _dashboard: DashboardService) { }
+
   ngOnInit(): void {
     this.getTransactions();
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribeSignal.next();
+  }
+
   // Buscar Transações
   getTransactions(): void {
-  this._dashboard.findTransactions().subscribe({
-    next: (response: { body: any; }) => {
-      // Atualizando as transações
-      this.transactions = response.body;
-    },
-    error: (err: any) => {
-      console.log("Erro ao buscar transações ", err);
-    }
-  });
-}
-
-announceSortChange(sortState: any) {
-  // This example uses English messages. If your application supports
-  // multiple language, you would internationalize these strings.
-  // Furthermore, you can customize the message to add additional
-  // details about the values being sorted.
-  if (sortState.direction) {
-    this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-  } else {
-    this._liveAnnouncer.announce('Sorting cleared');
+    this.subManger = this._dashboard.findTransactions().pipe(
+      takeUntil(this.unsubscribeSignal.asObservable()),
+    ).subscribe({
+      next: (response: { body: any; }) => {
+        // Atualizando as transações
+        this.dataSource = new MatTableDataSource(response.body);
+        this.getPaginator()
+      },
+      error: (err: any) => {
+        console.error("Erro ao buscar transações ", err);
+      }
+    });
   }
-}
 
+  // Input de busca 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  private getPaginator(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  colorIcoChoice(type: number): string {
+    return type == 0 ? "rgb(121, 207, 135)" : "rgb(224, 134, 134)"
+  }
 }

@@ -4,6 +4,7 @@ import { DashboardService } from '../../../core/services/dashboard.service';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Transactions } from '../../../shared/models/transaction.modal';
 import { UserData } from '../../../shared/models/userdata.model';
+import { Wallets } from '../../../shared/models/wallet.modal';
 import { NgFor, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -18,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  wallets: any = [];
+  wallets: Wallets[] = [];
   transactions: Transactions[] | any = [];
   chart: Chart<"line", string[], never> | any | Subscription;
 
