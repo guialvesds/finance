@@ -1,0 +1,59 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield !important; 
+  }
+
+  section {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    width: 30rem;
+
+    .container-form, .buttons-action  {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        padding-block: 5px;
+
+        h2 {
+            color: rgb(94, 94, 94);
+        }
+
+        mat-form-field {
+            width: 60%;
+        }
+
+        .buttons-action {
+            flex-direction: row;
+            width: 60%;
+
+            button {
+                border-radius: 4px;
+                box-shadow: none;
+                width: 7rem;
+                height: 2.2rem;
+
+                &:nth-child(1) {
+                    background-color: rgb(211, 107, 107);
+                }
+                &:nth-child(2) {
+                    background-color: rgb(95, 194, 125);
+                }
+            }
+        }
+    }
+  }

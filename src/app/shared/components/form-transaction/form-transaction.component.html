@@ -1,0 +1,31 @@
+<section>
+    <div class="container-form">
+        <h2>Cadastrar nova transação</h2>
+        <mat-form-field>
+            <mat-label>Descrição</mat-label>
+            <input matInput maxlength="25">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Tipo</mat-label>
+            <mat-select>
+                <mat-option value="one">Entrada</mat-option>
+                <mat-option value="two">Saída</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+            <mat-label>Valor</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0">
+            <span matTextPrefix>R$&nbsp;</span>
+        </mat-form-field>
+        <div class="buttons-action">
+            <button mat-fab (click)="dialogRef.close()">
+                <!-- <mat-icon>cancel_presentation</mat-icon> -->
+                Cancelar
+            </button>
+            <button mat-fab>
+                <!-- <mat-icon>add_box</mat-icon> -->
+                Cadastrar
+            </button>
+        </div>
+    </div>
+</section>
