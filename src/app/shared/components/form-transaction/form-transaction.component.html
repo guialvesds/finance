@@ -3,7 +3,14 @@
         <h2>Cadastrar nova transação</h2>
         <mat-form-field>
             <mat-label>Descrição</mat-label>
-            <input matInput maxlength="25">
+            <!-- <input matInput maxlength="25"> -->
+            <mat-select>
+                <mat-option value="one">Aporte em conta</mat-option>
+                <mat-option value="two">Farmácia</mat-option>
+                <mat-option value="tree">Despesa Geral</mat-option>
+                <mat-option value="for">Despesa Pessoal</mat-option>
+                <mat-option value="five">Guardar</mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Tipo</mat-label>

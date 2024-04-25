@@ -3,7 +3,7 @@
         <!-- Carteiras -->
         <div class="card-detail" *ngFor="let item of wallets">
             <span>{{item.walet_name}}</span>
-            <span>R$ {{item.value}}</span>
+            <span>{{coinRealFormat(item.value)}}</span>
         </div>
     </div>
     <div class="body">
@@ -23,7 +23,7 @@
             <h3>Movimentação Geral</h3>
             <div class="line-transaction" *ngFor="let item of transactions">
                 <span>{{item.user_name}}</span>
-                <span>R$ {{item.value}}</span>
+                <span>{{coinRealFormat(item.value)}}</span>
                 <span>{{item.date}}</span>
                 <span>{{item.to_wallet}}</span>
                 <mat-icon matListItemIcon   [ngStyle]="{'background-color': colorIcoChoice(item.type), 'color': 'white' }">{{iconChoice(item.type)}}</mat-icon>

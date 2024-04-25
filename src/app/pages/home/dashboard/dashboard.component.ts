@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Transactions } from '../../../shared/models/transaction.modal';
-import { UserData } from '../../../shared/models/userdata.model';
+import { UserData } from '../../../shared/models/userData.model';
 import { Wallets } from '../../../shared/models/wallet.modal';
 import { NgFor, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -165,6 +165,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   colorIcoChoice(type: number): string {
     return type == 0 ? "rgb(121, 207, 135)" : "rgb(224, 134, 134)"
+  }
+   // Formatação de moeda real pt-Br
+   coinRealFormat(data: number): string {
+    return data.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
   }
 }
 
