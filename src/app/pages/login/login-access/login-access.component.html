@@ -13,18 +13,24 @@
             <li></li>
         </ul>
     </div>
-    <div class="card-login">
+    <form class="card-login" [formGroup]="userForm">
         <div class="top">
             <h1>Login</h1>
         </div>
+       
         <div class="main">
-            <input type="email" name="email" placeholder="seuemail@email.com">
-            <input type="password" name="password" placeholder="sua senha">
+            <h3 class="errorLogin">
+                @if (errorMessage) {
+                    {{message}}
+                }
+                </h3>
+            <input type="email" name="email" placeholder="seuemail@email.com" formControlName="email">
+            <input type="password" name="password" placeholder="sua senha" formControlName="pass">
         </div>
         <div class="footer">
-            <button (click)="navigate('/home')">Entrar</button>
+            <button (click)="login($event)">Entrar</button>
             <span>Ou</span>
             <button (click)="navigate('/login/createAccount')">Criar conta.</button>
         </div>
-    </div>
+    </form>
 </section>

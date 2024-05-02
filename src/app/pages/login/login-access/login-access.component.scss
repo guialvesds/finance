@@ -135,6 +135,12 @@
             align-items: center;
             margin-bottom: -1rem;
 
+            .errorLogin {
+                border-left: solid 2px red;
+                padding-left: 5px;
+                color: red;
+            }
+
             input {
                 margin-top: 1rem;
                 width: 50%;
