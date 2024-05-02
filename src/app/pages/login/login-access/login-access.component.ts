@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserServiceService } from '../../../core/services/user.service.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Users } from '../../../shared/models/users.model';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login-access',
@@ -21,11 +22,14 @@ export class LoginAccessComponent implements OnInit {
   errorMessage: boolean = false;
   message!: string;
 
+  subManger!: Subscription;
+  unsubscribeSignal: Subject<void> = new Subject();
+
   ngOnInit(): void {}
 
   constructor(
     private _route: Router,
-    private _userService: UserServiceService
+    private _userService: UserServiceService,
   ) { }
 
   public navigate(router: string): void {
@@ -37,7 +41,9 @@ export class LoginAccessComponent implements OnInit {
 
     console.log(this.userForm.value);
     
-    this._userService.login().subscribe({
+   this.subManger = this._userService.login().pipe(
+    takeUntil(this.unsubscribeSignal.asObservable()),
+  ).subscribe({
       next: (res) => {
 
         const dataRes: any = res.body;
@@ -54,7 +60,7 @@ export class LoginAccessComponent implements OnInit {
           setTimeout(() => {
             this.errorMessage = false
           }, 5000);
-          
+
         }        
       },
       error: (err) => {
