@@ -1,0 +1,208 @@
+{
+  "wallet": [
+    {
+      "id": "1",
+      "walet_name": "Entrada",
+      "value": 1000
+    },
+    {
+      "id": "2",
+      "walet_name": "Saída",
+      "value": 500
+    },
+    {
+      "id": "3",
+      "walet_name": "Saldo",
+      "value": 500
+    }
+  ],
+  "user": [
+    {
+      "id": "1",
+      "user_name": "Admin",
+      "user_name2": "Master",
+      "email": "admin@email.com",
+      "pass": "@Abc1"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "1",
+      "user_name": "Guilherme Alves",
+      "value": 209.9,
+      "date": "01-04-2024",
+      "to_wallet": "Retirada",
+      "type": "1"
+    },
+    {
+      "id": "2",
+      "user_name": "Guilherme Alves",
+      "value": 109.9,
+      "date": "01-04-2024",
+      "to_wallet": "Entrada",
+      "type": "0"
+    },
+    {
+      "id": "3",
+      "user_name": "Guilherme Alves",
+      "value": 209.9,
+      "date": "01-04-2024",
+      "to_wallet": "Entrada",
+      "type": "0"
+    },
+    {
+      "id": "4",
+      "user_name": "Annáthaly Ipolito",
+      "value": 9.9,
+      "date": "06-04-2024",
+      "to_wallet": "Retirada",
+      "type": "1"
+    },
+    {
+      "id": "5",
+      "user_name": "Annáthaly Ipolito",
+      "value": 59.9,
+      "date": "06-04-2024",
+      "to_wallet": "Retirada",
+      "type": "1"
+    },
+    {
+      "id": "6",
+      "user_name": "Guilherme Alves",
+      "value": 209.9,
+      "date": "06-04-2024",
+      "to_wallet": "Retirada",
+      "type": "1"
+    },
+    {
+      "id": "7",
+      "user_name": "Annáthaly Ipolito",
+      "value": 209.9,
+      "date": "06-04-2024",
+      "to_wallet": "Entrada",
+      "type": "0"
+    },
+    {
+      "id": "8",
+      "user_name": "Guilherme Alves",
+      "value": 40.9,
+      "date": "09-04-2024",
+      "to_wallet": "Entrada",
+      "type": "0"
+    },
+    {
+      "id": "9",
+      "user_name": "Silvana Alves",
+      "value": 209.9,
+      "date": "09-04-2024",
+      "to_wallet": "Retirada",
+      "type": "1"
+    },
+    {
+      "id": "10",
+      "user_name": "Karla Alves",
+      "value": 10.9,
+      "date": "16-07-2024",
+      "to_wallet": "Entrada",
+      "type": "0"
+    },
+    {
+      "id": "1acd",
+      "userName": "Guilherme Alves",
+      "describe": "twFarmáciao",
+      "type": "Saída",
+      "DataTransfer": "02 /05 /2024",
+      "value": "R$ 1.990,00"
+    },
+    {
+      "id": "de7e",
+      "userName": "Guilherme Alves",
+      "describe": "Aporte em conta",
+      "type": "Entrada",
+      "date": "02 /05 /2024",
+      "value": "R$ 199,90"
+    },
+    {
+      "id": "2650",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "",
+      "date": "02 /05 /2024",
+      "value": ""
+    },
+    {
+      "id": "f9b7",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "",
+      "date": "02 /05 /2024",
+      "value": ""
+    },
+    {
+      "id": "db1d",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "",
+      "date": "02 /05 /2024",
+      "value": ""
+    },
+    {
+      "id": "924a",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "Entrada",
+      "date": "02 /05 /2024",
+      "value": "R$ 199,90"
+    },
+    {
+      "id": "a9a4",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "",
+      "date": "02 /05 /2024",
+      "value": "R$ 10,90"
+    },
+    {
+      "id": "dde2",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "",
+      "date": "02 /05 /2024",
+      "value": "R$ 19,90"
+    },
+    {
+      "id": "1f7b",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "",
+      "date": "02 /05 /2024",
+      "value": "R$ 1,00"
+    },
+    {
+      "id": "0ee4",
+      "user_name": "Guilherme Alves",
+      "describe": "",
+      "type": "",
+      "date": "02 /05 /2024",
+      "value": "R$ 19,00"
+    },
+    {
+      "id": "5ba2",
+      "user_name": "Guilherme Alves",
+      "describe": "Aporte em conta",
+      "to_wallet": "Entrada",
+      "type": "0",
+      "date": "02 /05 /2024",
+      "value": "R$ 1,00"
+    },
+    {
+      "id": "bf6d",
+      "user_name": "Guilherme Alves",
+      "describe": "Despesa Geral",
+      "to_wallet": "Saída",
+      "type": "1",
+      "date": "02 /05 /2024",
+      "value": "R$ 1,00"
+    }
+  ]
+}

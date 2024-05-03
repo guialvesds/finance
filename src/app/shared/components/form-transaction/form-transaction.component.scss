@@ -55,5 +55,22 @@
                 }
             }
         }
+
+        .sucCess, .errorMess {
+          margin-top: 3px;
+          background-color: transparent;          
+          padding-inline: 5px;
+          letter-spacing: 1px;
+        }
+
+        .sucCess {
+          color: green;
+          border-left: solid 2px rgb(9, 121, 9);
+        }
+
+        .errorMess {
+          color: rgb(153, 11, 11);
+          border-left: solid 2px rgb(161, 18, 18);
+        }
     }
   }

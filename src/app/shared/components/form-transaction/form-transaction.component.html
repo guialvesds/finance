@@ -1,27 +1,27 @@
 <section>
-    <div class="container-form">
+    <form class="container-form" [formGroup]="transactionForm">
         <h2>Cadastrar nova transação</h2>
         <mat-form-field>
             <mat-label>Descrição</mat-label>
             <!-- <input matInput maxlength="25"> -->
-            <mat-select>
-                <mat-option value="one">Aporte em conta</mat-option>
-                <mat-option value="two">Farmácia</mat-option>
-                <mat-option value="tree">Despesa Geral</mat-option>
-                <mat-option value="for">Despesa Pessoal</mat-option>
-                <mat-option value="five">Guardar</mat-option>
+            <mat-select formControlName="describe">
+                <mat-option value="Aporte em conta">Aporte em conta</mat-option>
+                <mat-option value="Farmácia">Farmácia</mat-option>
+                <mat-option value="Despesa Geral">Despesa Geral</mat-option>
+                <mat-option value="Despesa Pessoal">Despesa Pessoal</mat-option>
+                <mat-option value="Guardar">Guardar</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field >
             <mat-label>Tipo</mat-label>
-            <mat-select>
-                <mat-option value="one">Entrada</mat-option>
-                <mat-option value="two">Saída</mat-option>
+            <mat-select formControlName="type">
+                <mat-option value="Entrada">Entrada</mat-option>
+                <mat-option value="Saída">Saída</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field floatLabel="always">
+        <mat-form-field floatLabel="always" >
             <mat-label>Valor</mat-label>
-            <input matInput type="number" class="example-right-align" placeholder="0">
+            <input matInput type="number" class="example-right-align" placeholder="0" formControlName="value">
             <span matTextPrefix>R$&nbsp;</span>
         </mat-form-field>
         <div class="buttons-action">
@@ -29,10 +29,20 @@
                 <!-- <mat-icon>cancel_presentation</mat-icon> -->
                 Cancelar
             </button>
-            <button mat-fab>
+            <button mat-fab (click)="submit()">
                 <!-- <mat-icon>add_box</mat-icon> -->
                 Cadastrar
             </button>
         </div>
-    </div>
+        <h2 class="sucCess">
+            @if(putDes) {
+                {{putDescription}}
+            }
+            </h2>
+            <h2 class="errorMess">
+                @if(putDesErr) {
+                    {{putDescription}}
+                }
+                </h2>
+    </form>
 </section>
