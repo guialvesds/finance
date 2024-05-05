@@ -1,157 +1,151 @@
 section {
+  .head,
+  .card-detail,
+  .transctions-person {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 
-    .head,
-    .card-detail,
+  .head {
+    width: 100%;
+    flex-direction: row;
+
+    .card-detail {
+      width: 17rem;
+      height: 6rem;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 5px;
+
+      &:nth-child(1) {
+        background-color: rgb(135, 135, 226);
+      }
+
+      &:nth-child(2) {
+        background-color: rgb(224, 134, 134);
+      }
+
+      &:nth-child(3) {
+        background-color: rgb(121, 207, 135);
+      }
+
+      span {
+        letter-spacing: 2px;
+        color: white;
+        font-weight: 500;
+
+        &:nth-child(1) {
+          font-size: 1.3em;
+        }
+
+        &:nth-child(2) {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+
+  .body {
+    .container-chart1 {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-around;
+      margin-top: 3rem;
+
+      flex-wrap: wrap;
+
+      h3 {
+        font-weight: 500;
+        letter-spacing: 2px;
+        border-bottom: solid 2px rgba(0, 0, 0, 0.322);
+      }
+
+      .div-chart {
+        width: 32rem;
+      }
+
+      .div-chart2 {
+        width: 16rem;
+      }
+    }
+
     .transctions-person {
+      // width: 80%;
+      margin-top: 2rem;
+
+      h3 {
+        width: 90%;
+        font-weight: 500;
+        letter-spacing: 2px;
+        border-bottom: solid 2px rgba(0, 0, 0, 0.322);
+      }
+
+      .line-transaction {
+        width: 90%;
+        background-color: rgb(235, 250, 255);
+        margin-block: 4px;
+        padding: 8px;
+        border-radius: 3px;
+
         display: flex;
-        justify-content: space-evenly;
         align-items: center;
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
+        justify-content: space-around;
 
-    .head {
-        width: 100%;
-        flex-direction: row;
-
-        .card-detail {
-
-            width: 17rem;
-            height: 6rem;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 5px;
-
-            &:nth-child(1) {
-                background-color: rgb(135, 135, 226);
-            }
-
-            &:nth-child(2) {
-                background-color: rgb(224, 134, 134);
-            }
-
-            &:nth-child(3) {
-                background-color: rgb(121, 207, 135);
-            }
-
-            span {
-                letter-spacing: 2px;
-                color: white;
-                font-weight: 500;
-
-                &:nth-child(1) {
-                    font-size: 1.3em;
-                }
-
-                &:nth-child(2) {
-                    font-size: 1em;
-                }
-            }
+        span {
+          flex: 1;
+          text-align: left;
+          color: rgb(63, 63, 63);
+          font-weight: 400;
+          letter-spacing: 1px;
         }
+      }
     }
-
-    .body {
-
-        .container-chart1 {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: space-around;
-            margin-top: 3rem;
-
-            flex-wrap: wrap;
-
-            h3 {
-                font-weight: 500;
-                letter-spacing: 2px;
-                border-bottom: solid 2px rgba(0, 0, 0, 0.322);
-            }
-
-            .div-chart {
-                width: 32rem;
-            }
-
-            .div-chart2 {
-                width: 16rem;
-            }
-        }
-
-        .transctions-person {
-            // width: 80%;
-            margin-top: 5px;
-
-            h3 {
-                width: 90%;
-                font-weight: 500;
-                letter-spacing: 2px;
-                border-bottom: solid 2px rgba(0, 0, 0, 0.322);
-            }
-
-            .line-transaction {
-                width: 90%;
-                background-color: rgb(235, 250, 255) ;
-                margin-block: 4px;
-                padding: 8px;
-                border-radius: 3px;
-
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-
-                span {
-                    flex: 1;
-                    text-align: left;
-                    color: rgb(112, 112, 112);
-                    font-weight: 400;
-                }
-
-
-            }
-        }
-    }
+  }
 }
 
 @media screen and (max-width: 900px) {
+  .head {
+    width: 100%;
+    flex-direction: column;
 
-    .head {
-        width: 100%;
-        flex-direction: column;
-
-        .card-detail {
-            width: 90%;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            // margin: 5px;
-        }
+    .card-detail {
+      width: 90%;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      // margin: 5px;
     }
+  }
 
-    .body {
+  .body {
+    .container-chart1 {
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      margin-top: 3rem;
 
-        .container-chart1 {
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-            margin-top: 3rem;
+      flex-wrap: wrap;
 
-            flex-wrap: wrap;
+      h3 {
+        font-weight: 400;
+        letter-spacing: 2px;
+        border-bottom: solid 2px rgba(0, 0, 0, 0.322);
+      }
 
-            h3 {
-                font-weight: 400;
-                letter-spacing: 2px;
-                border-bottom: solid 2px rgba(0, 0, 0, 0.322);
-            }
+      .div-chart {
+        width: 80%;
+        margin-bottom: 1rem;
+      }
 
-            .div-chart {
-                width: 80%;
-                margin-bottom: 1rem;
-            }
-
-            .div-chart2 {
-                width: 80%;
-            }
-        }
+      .div-chart2 {
+        width: 80%;
+      }
     }
+  }
 }

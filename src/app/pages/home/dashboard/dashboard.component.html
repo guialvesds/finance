@@ -14,14 +14,14 @@
                 <canvas id="transactions-value-chart">{{chart}}</canvas>
             </div>
             <div class="div-chart2">
-                <h3>Movimentação por pessoa</h3>
+                <h3>Movimentação por tipo</h3>
                 <canvas id="transactions-person-chart">{{chart}}</canvas>
             </div>
         </div>
         <div class="transctions-person" >
-            <!-- Infro top 10 ultimas transações -->
-            <h3>Movimentação Geral</h3>
-            <div class="line-transaction" *ngFor="let item of transactions">
+            <!-- top 10 ultimas transações -->
+            <h3>Movimentação Geral - Top últimas 10</h3>
+            <div class="line-transaction" *ngFor="let item of transactions.slice(-10).reverse()">
                 <span>{{item.user_name}}</span>
                 <span>{{coinRealFormat(item.value)}}</span>
                 <span>{{item.date}}</span>

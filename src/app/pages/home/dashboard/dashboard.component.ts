@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.wallets = item.body;
       },
       error: (err: any) => {
-        console.log("Erro ao buscar carteiras ", err);
+        console.log("Erro ao buscar carteiras: ", err);
       }
     }));
   }
@@ -63,12 +63,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
       },
       error: (err: any) => {
-        console.log("Erro ao buscar transações ", err);
+        console.log("Erro ao buscar transações: ", err);
       }
     }));
   }
 
-  // Criar o chart de total de transações no mês
+  // Criar o chart de total de transações
   createChart() {
     const entradaTotals: number[] = [];
     const retiradaTotals: number[] = [];
@@ -126,16 +126,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // Agrupar transações por user_name e armazenar os dados
     const groupedTransactionsByUser: { [key: string]: number } = {};
     this.transactions.forEach((transaction: UserData) => {
-      if (!groupedTransactionsByUser[transaction.user_name]) {
-        groupedTransactionsByUser[transaction.user_name] = 0;
+      if (!groupedTransactionsByUser[transaction.describe]) {
+        groupedTransactionsByUser[transaction.describe] = 0;
       }
-      groupedTransactionsByUser[transaction.user_name]++;
+      groupedTransactionsByUser[transaction.describe]++;
     });
 
     // Preencher o array userData com os dados de usuário e transações
-    Object.keys(groupedTransactionsByUser).forEach(user_name => {
-      const totalTransactions = groupedTransactionsByUser[user_name];
-      userData.push({ user_name: user_name, transaction_count: totalTransactions });
+    Object.keys(groupedTransactionsByUser).forEach(describe => {
+      const totalTransactions = groupedTransactionsByUser[describe];
+      userData.push({ describe: describe, transaction_count: totalTransactions });
     });
     this.chart = new Chart('transactions-person-chart',
       {
@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         },
         data: {
-          labels: userData.map(item => item.user_name),
+          labels: userData.map(item => item.describe),
           datasets: [
             {
               // label: `${userData.map(item => item.user_name)}`,

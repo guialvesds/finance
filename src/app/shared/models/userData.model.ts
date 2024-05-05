@@ -1,4 +1,4 @@
 export interface UserData {
-    user_name: string;
+    describe: string;
     transaction_count: number;
 }

@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionService } from '../../../core/services/transaction.service';
+import { WalletService } from '../../../core/services/wallet.service';
 
 
 
@@ -19,7 +20,7 @@ import { TransactionService } from '../../../core/services/transaction.service';
 })
 export class FormTransactionComponent implements OnInit {
 
-  transactionForm = new FormGroup({
+ public transactionForm = new FormGroup({
     userName: new FormControl(''),
     describe: new FormControl(''),
     type: new FormControl(''),
@@ -27,27 +28,31 @@ export class FormTransactionComponent implements OnInit {
     value: new FormControl(''),
   });
 
-  putDescription!: String;
-  putDes: boolean =  false;
-  putDesErr: boolean =  false;
+ public putDescription!: String;
+ public putDes: boolean =  false;
+ public putDesErr: boolean =  false;
   
 
-  constructor(public dialogRef: DialogRef, private _transaction: TransactionService
+  constructor(public dialogRef: DialogRef, 
+    private _transaction: TransactionService, 
+    private _walletInsert: WalletService
   ) { }
 
   ngOnInit(): void {
   }
 
-  submit(): void {   
+  public submit(): void {  
     
-    if(this.transactionForm.value.type == "" || this.transactionForm.value.describe == ""  || this.transactionForm.value.value == "" ) {
+    const validationForm = this.transactionForm.value.type == "" || this.transactionForm.value.describe == ""  || this.transactionForm.value.value == "";
+    
+    if(validationForm) {
        
       this.putDesErr = true;
       this.putDescription = "Preencher todos os campos!"
 
       setTimeout(() => {
      this.putDesErr = false;
-     this.putDescription = ""
+     this.putDescription = "";
       }, 3000);
 
       return
@@ -62,38 +67,45 @@ export class FormTransactionComponent implements OnInit {
       value: this.transactionForm.value.value,
     }
 
-   
-
-    console.log(dataForm.type);
-    
+    const walletIdValidation = dataForm.type == 0 ? 1 : 2;
 
     this._transaction.putTransaction(dataForm).subscribe({
       next: (res) => {
 
-       
+        this.putDes = true;
+        this.putDescription = "Criado com sucesso!"
 
         setTimeout(() => {
-          this.putDes = true;
-          this.putDescription = "Criado com sucesso!"
+          this.putDes = false;
+          this.putDescription = ""
         }, 3000);
         
       },
       error: (err) => {
-        console.error(err);
+        console.error(err);        
+      }
+    }); 
+
+    this._walletInsert.insertValueWallet(walletIdValidation, dataForm.value).subscribe({
+      next: (res) => {
+        console.log(res, 'deu certo');
+        
+      },
+      error: (err) => {
+        console.log(err);
         
       }
     });
     
-    console.log(dataForm);
     
   }
 
   // Formatação de moeda real pt-Br
-  coinRealFormat(data: any): string {
+  public coinRealFormat(data: any): string {
     return data.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
   }
 
-  getDate(): string {
+ private getDate(): string {
     const dateNow = new Date();
   
     const dateActual: any = {
@@ -105,6 +117,6 @@ export class FormTransactionComponent implements OnInit {
     dateActual.day = dateActual.day < 10 ? '0' + dateActual.day : dateActual.day;
     dateActual.month = dateActual.month < 10 ? '0' + dateActual.month : dateActual.month;
   
-    return `${dateActual.day} /${dateActual.month} /${dateActual.year}`;
+    return `${dateActual.day}/${dateActual.month}/${dateActual.year}`;
   }  
 }
