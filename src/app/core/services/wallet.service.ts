@@ -74,7 +74,6 @@ export class WalletService {
     return forkJoin([entrance$, expense$]).pipe(
         mergeMap(() => {
             const balance = totalEntrance - totalExpense;
-
             // Atualiza o valor da wallet 3 com o saldo calculado
             return this.http.patch<any>(`${this.urlApi}/wallet/3`, { value: balance }, {
                 observe: 'response'

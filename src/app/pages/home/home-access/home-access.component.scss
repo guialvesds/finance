@@ -1,27 +1,24 @@
 mat-toolbar {
-    position: relative;
-    z-index: 5;
-    background-color: rgb(47, 82, 112);
+  position: relative;
+  z-index: 5;
+  background-color: rgb(28, 22, 61);
 
-    button {
-        color: aliceblue;
-    }
+  button {
+    color: aliceblue;
+  }
 }
 
 mat-sidenav-container {
+  height: calc(100vh - 64px);
+  background-color: rgb(255, 255, 255);
 
-    height: calc(100vh - 64px);
-    background-color: white;
+  .content {
+    padding: 20px;
+  }
 
-    .content {
-        padding: 20px;
-    }
-
-    mat-sidenav,
-    mat-sidenav-content {
-
-        transition: all 500ms ease-in-out;
-    }
-
-
+  mat-sidenav,
+  mat-sidenav-content {
+    transition: all 500ms ease-in-out;
+    background-color: rgb(255, 255, 255);
+  }
 }

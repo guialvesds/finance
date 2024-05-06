@@ -58,7 +58,7 @@ export class FormTransactionComponent implements OnInit {
       return
     }
 
-    const dataForm: FormData | any = {
+    const dataForm: any = {
       user_name: 'Guilherme Alves',
       describe: this.transactionForm.value.describe,
       to_wallet: this.transactionForm.value.type,

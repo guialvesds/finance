@@ -19,7 +19,7 @@ interface itemNav {
   styleUrl: './sidnav-custom.component.scss'
 })
 export class SidnavCustomComponent implements OnInit {
-  sidNavCollapsed = signal(false);
+  sidNavCollapsed = signal(true);
   @Input() set collapsed(val: boolean) {
     this.sidNavCollapsed.set(val)
   }

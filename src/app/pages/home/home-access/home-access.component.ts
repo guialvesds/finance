@@ -28,7 +28,7 @@ export class HomeAccessComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isMobile = true;
-  isCollapsed = true;
+  isCollapsed = true!;
 
 
   navItens: Array<itemNav> = [
@@ -54,6 +54,6 @@ export class HomeAccessComponent implements OnInit {
 
   }
 
-  collapsed = signal(false);
+  collapsed = signal(true);
   sidNavWidth = computed(() => this.collapsed() ? '75px' : '250px')
 }
