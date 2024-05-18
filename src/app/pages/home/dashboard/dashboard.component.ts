@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   subManger!: Subscription;
   unsubscribeSignal: Subject<void> = new Subject();
+  dataCrypto!: any;
 
   constructor(private _dashboard: DashboardService) { }
 

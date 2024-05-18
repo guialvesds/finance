@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Dialog, DialogRef, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { NgFor, NgStyle } from '@angular/common';
 import { FormTransactionComponent } from '../../../shared/components/form-transaction/form-transaction.component';
+import { TransactionService } from '../../../core/services/transaction.service';
+import { WalletService } from '../../../core/services/wallet.service';
 
 
 
@@ -27,7 +29,7 @@ import { FormTransactionComponent } from '../../../shared/components/form-transa
 })
 export class TransactionsComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['id', 'user_name', 'describe', 'value', 'date', 'type'];
+  displayedColumns: string[] = ['id', 'user_name', 'describe', 'value', 'date', 'type', 'action'];
   dataSource!: MatTableDataSource<Transactions>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,7 +38,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   subManger!: Subscription;
   unsubscribeSignal: Subject<void> = new Subject();
 
-  constructor(private _dashboard: DashboardService, public _dialog: Dialog) { }
+  constructor(private _dashboard: DashboardService, public _dialog: Dialog, private _transactionService: TransactionService, private _walletService: WalletService) { }
 
   ngOnInit(): void {
     this.getTransactions();
@@ -94,6 +96,32 @@ export class TransactionsComponent implements OnInit, OnDestroy {
         },
         error: (err: any) => {
           console.error("Erro ao buscar transações ", err);
+        }
+      });
+    }
+
+    public deleteTransaction(trasactionId: number, valueRemove: number, type: string): void {
+      this._transactionService.deleteTransaction(trasactionId).subscribe({
+        next: (res) => {
+
+          console.log("excluiu", res);
+         
+
+          const walletID: number = type == "0" ? 1 : 2;
+
+          this._walletService.deletetValueWallet(walletID, valueRemove).subscribe({
+            next: (res) => {
+              console.log("Removeu valor", res);
+            },
+            error: (err) => {
+              console.error(err);
+            }
+          });
+
+          this.getTransactions();
+        },
+        error: (err) => {
+          console.error(err);          
         }
       });
     }

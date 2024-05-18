@@ -1,26 +1,42 @@
 .mat-mdc-form-field {
-    font-size: 14px;
-    width: 40%;
+  font-size: 14px;
+  width: 40%;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+
+.search-end-add {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  .example-button-container {
+    button {
+      border-radius: 8px;
+      box-shadow: none;
+    }
   }
+}
 
-  .mat-elevation-z8 {
-    box-shadow: none;
-  }
+.button-td-container,
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 
-  .search-end-add {
+  button {
+    mat-icon {
+      color: rgb(202, 75, 75);
+      width: 2rem;
+      margin: 0;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-
-    .example-button-container {
-
-        
-        button {
-            border-radius: 8px;
-            box-shadow: none;
-        }
+      &:hover {
+        color: rgb(206, 111, 111);
       }
+    }
   }
-  
+}

@@ -22,8 +22,7 @@ export class WalletService {
     });
   }
 
-  public findOneWallet(id: number): Observable<HttpResponse<Wallets>> {
-    
+  public findOneWallet(id: number): Observable<HttpResponse<Wallets>> {    
       return this.http.get<Wallets>(`${this.urlApi}/wallet/${id}`, {
         observe: 'response',
       }); 
@@ -35,6 +34,26 @@ export class WalletService {
       mergeMap((wallet: Wallets) => {
         if (wallet) {
           wallet.value += valueAdd;
+          return this.http.patch<Wallets>(`${this.urlApi}/wallet/${walletID}`, { value: wallet.value }, {
+            observe: 'response'
+          }).pipe(
+            mergeMap(() => {
+              // Após atualizar o valor da wallet, atualiza o saldo da carteira
+              return this.updateBalance();
+            })
+          );
+        } else {
+          return throwError({ error: 'Wallet not found' });
+        }
+      })
+    );
+  }
+
+  public deletetValueWallet(walletID: number, valueRemove: number): Observable<HttpResponse<Wallets>> {
+    return this.http.get<Wallets>(`${this.urlApi}/wallet/${walletID}`).pipe(
+      mergeMap((wallet: Wallets) => {
+        if (wallet) {
+          wallet.value -= valueRemove;
           return this.http.patch<Wallets>(`${this.urlApi}/wallet/${walletID}`, { value: wallet.value }, {
             observe: 'response'
           }).pipe(
